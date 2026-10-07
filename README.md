@@ -1,5 +1,7 @@
 # Linear Regression Visual Lab
 
+**Live site:** https://snsie.github.io/linear-reg/
+
 An interactive React app based on the learner-facing notebook experiences in the linear regression walkthrough, plus an extension comparing linear and nonlinear regression:
 
 1. Meet the data
