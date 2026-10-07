@@ -97,9 +97,8 @@ function makePatients(noise = 10, sample = 0, scenario = 'linear', outlier = fal
     const randomA = wave - Math.floor(wave)
     const randomB = wave2 - Math.floor(wave2)
     const bmi = 17 + randomA * 25
-    const centered = bmi - 29.5
     const base = scenario === 'curved'
-      ? 124 + 0.11 * centered * centered + 0.35 * centered
+      ? 106 + 0.26 * (bmi - 26) ** 2
       : 68.5 + 2.4 * bmi
     const error = ((randomB - 0.5) * 1.75 + Math.sin(i * 2.2) * 0.35) * noise
     return { bmi, bp: base + error, id: i + 1 }
@@ -325,11 +324,11 @@ function ResidualPlot({ points, model }) {
   const height = 300
   const margin = { top: 22, right: 22, bottom: 52, left: 68 }
   const px = (value) => margin.left + ((value - 15) / 30) * (width - margin.left - margin.right)
-  const py = (value) => height - margin.bottom - ((value + 35) / 70) * (height - margin.top - margin.bottom)
+  const py = (value) => height - margin.bottom - ((value + 70) / 140) * (height - margin.top - margin.bottom)
   return (
     <div className="chart-frame">
       <svg viewBox={`0 0 ${width} ${height}`} role="img" aria-label="Residual plot">
-        {[-30, -15, 0, 15, 30].map((tick) => (
+        {[-60, -30, 0, 30, 60].map((tick) => (
           <g key={tick}>
             <line x1={margin.left} x2={width - margin.right} y1={py(tick)} y2={py(tick)} className={tick === 0 ? 'zero-line' : 'grid-line'} />
             <text x={margin.left - 13} y={py(tick) + 4} textAnchor="end" className="tick-label">{tick}</text>
